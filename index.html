@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inscription — Tech test</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="header">
+        <h1>Créer un compte</h1>
+        <p class="lede">
+          Renseignez vos informations. La photo est accessible via une URL
+          <code>blob:</code> locale.
+        </p>
+      </header>
+
+      <form id="register-form" class="form" novalidate>
+        <fieldset class="fieldset">
+          <legend>Identité</legend>
+          <div class="grid">
+            <label class="field">
+              <span class="label">Nom</span>
+              <input
+                name="nom"
+                type="text"
+                required
+                autocomplete="family-name"
+              />
+            </label>
+            <label class="field">
+              <span class="label">Prénom</span>
+              <input
+                name="prenom"
+                type="text"
+                required
+                autocomplete="given-name"
+              />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Coordonnées</legend>
+          <label class="field">
+            <span class="label">Adresse</span>
+            <textarea
+              name="adresse"
+              rows="2"
+              required
+              autocomplete="street-address"
+            ></textarea>
+          </label>
+          <div class="grid">
+            <label class="field">
+              <span class="label">Email</span>
+              <input name="email" type="email" required autocomplete="email" />
+            </label>
+            <label class="field">
+              <span class="label">Téléphone</span>
+              <input name="telephone" type="tel" required autocomplete="tel" />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Sécurité</legend>
+          <label class="field">
+            <span class="label">Mot de passe</span>
+            <input
+              name="motDePasse"
+              type="password"
+              required
+              minlength="1"
+              autocomplete="new-password"
+              id="password-input"
+            />
+          </label>
+          <p class="hint">
+            Pour vérifier le hachage (ex. <code>azerty</code>), vous pouvez
+            comparer le résultat hexadécimal avec des bases comme
+            <a
+              href="https://md5decrypt.net/Sha256"
+              target="_blank"
+              rel="noopener noreferrer"
+              >md5decrypt.net/Sha256</a
+            >.
+          </p>
+          <div class="hash-preview" aria-live="polite">
+            <span class="label"
+              >SHA-256 (aperçu, recalculé à la soumission)</span
+            >
+            <code id="hash-preview">—</code>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Photo de profil</legend>
+          <label class="field">
+            <span class="label">Fichier image</span>
+            <input name="photo" type="file" accept="image/*" id="photo-input" />
+          </label>
+          <div class="photo-row">
+            <div class="photo-meta">
+              <p class="label">
+                URL distincte (blob — consultable dans cet onglet)
+              </p>
+              <a
+                id="photo-url"
+                class="photo-url"
+                href="#"
+                hidden
+                target="_blank"
+                rel="noopener"
+                >Ouvrir la photo</a
+              >
+              <span id="photo-url-empty" class="muted"
+                >Aucune photo sélectionnée</span
+              >
+            </div>
+            <div class="thumb-wrap">
+              <img id="photo-thumb" alt="Aperçu" hidden />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Champs personnalisés</legend>
+          <p class="hint">
+            Ajoutez des paires libellé / valeur : elles seront fusionnées dans
+            l’objet utilisateur envoyé à l’API.
+          </p>
+          <div id="custom-fields" class="custom-list"></div>
+          <button type="button" id="add-custom-field" class="btn secondary">
+            + Ajouter un champ
+          </button>
+        </fieldset>
+
+        <div class="actions">
+          <button type="submit" class="btn primary" id="submit-btn">
+            Envoyer l’inscription
+          </button>
+        </div>
+
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+      </form>
+    </main>
+
+    <template id="custom-field-template">
+      <div class="custom-row">
+        <label class="field tight">
+          <span class="label">Libellé</span>
+          <input type="text" class="custom-label" placeholder="Ex. Métier" />
+        </label>
+        <label class="field tight grow">
+          <span class="label">Valeur</span>
+          <input
+            type="text"
+            class="custom-value"
+            placeholder="Ex. Développeur"
+          />
+        </label>
+        <button
+          type="button"
+          class="btn icon remove-custom"
+          title="Retirer ce champ"
+          aria-label="Retirer ce champ"
+        >
+          ×
+        </button>
+      </div>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
