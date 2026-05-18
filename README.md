@@ -2,6 +2,8 @@
 
 Projet statique : formulaire HTML, POST JSON vers l’API de staging (`app.js`, constante `API`).
 
+Visualisation : [register-user-crypto-password.vercel.app](https://register-user-crypto-password.vercel.app/)
+
 ## Lancer en local
 
 npx --yes serve .
@@ -21,4 +23,4 @@ le formulaire affiche Failed to fetch sans une requête OPTIONS (preflight CORS)
 
 `index.html`| Formulaire et gabarits  
  `styles.css`| Styles  
-`app.js` | SHA‑256, champs dynamiques, fetc
+`app.js` | SHA‑256, champs dynamiques, `fetch`
