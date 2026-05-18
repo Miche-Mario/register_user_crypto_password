@@ -1,19 +1,24 @@
-#Formulaire d’inscription
+# Formulaire d’inscription
 
-Projet statique : formulaire HTML pour enregistrer un utilisateur et envoyer les données en POST vers l’API de staging
+Projet statique : formulaire HTML, POST JSON vers l’API de staging (`app.js`, constante `API`).
 
 ## Lancer en local
 
-À la racine du projet :
-
 npx --yes serve .
 
-Ouvrez l’URL indiquée (souvent `http://localhost:3000`).
+## Je recois une erreur lors du test de l’API
 
-## Structure du dépôt
+```bash
+curl --noproxy '*' -sS -X POST 'https://staging.backend.leihia.com:8081/app/tech-test' \
+  -H 'Content-Type: application/json' \
+  -d '{"nom":"x","prenom":"y","adresse":"z","email":"a@b.c","telephone":"0","motDePasseSha256":"00","photoProfil":{"blobUrl":null,"nomFichier":null,"typeMime":null,"dataUrl":null}}'
+```
 
-Fichier Rôle
+curl ne joint pas le serveur (timeout, erreur réseau), le problème vient peut etre du réseau, du pare-feu ou du service
+le formulaire affiche Failed to fetch sans une requête OPTIONS (preflight CORS)
 
-`index.html` Structure du formulaire et gabarits  
-`styles.css` Styles  
- `app.js` SHA-256, champs dynamiques, `fetch` POST
+### Fichiers
+
+`index.html`| Formulaire et gabarits  
+ `styles.css`| Styles  
+`app.js` | SHA‑256, champs dynamiques, fetc

@@ -16,12 +16,15 @@ var submitBtn = document.getElementById("submit-btn");
 var blobUrl = null;
 
 function sha256(s) {
-  return crypto.subtle.digest("SHA-256", new TextEncoder().encode(s)).then(function (buf) {
-    var hex = "";
-    var a = new Uint8Array(buf);
-    for (var i = 0; i < a.length; i++) hex += a[i].toString(16).padStart(2, "0");
-    return hex;
-  });
+  return crypto.subtle
+    .digest("SHA-256", new TextEncoder().encode(s))
+    .then(function (buf) {
+      var hex = "";
+      var a = new Uint8Array(buf);
+      for (var i = 0; i < a.length; i++)
+        hex += a[i].toString(16).padStart(2, "0");
+      return hex;
+    });
 }
 
 function readAsDataUrl(file) {
@@ -85,7 +88,8 @@ form.onsubmit = async function (e) {
 
   if (!crypto.subtle) {
     statusEl.className = "status error";
-    statusEl.textContent = "Hash SHA-256 : utilise localhost ou HTTPS, pas file://.";
+    statusEl.textContent =
+      "Hash SHA-256 : utilise localhost ou HTTPS, pas file://.";
     return;
   }
 
@@ -130,7 +134,10 @@ form.onsubmit = async function (e) {
       var txt = await res.text();
       statusEl.className = "status error";
       statusEl.textContent =
-        "Pas 200 (" + res.status + ")" + (txt && txt.length < 300 ? " — " + txt : "");
+        "Pas 200 (" +
+        res.status +
+        ")" +
+        (txt && txt.length < 300 ? " — " + txt : "");
     }
   } catch (err) {
     statusEl.className = "status error";
